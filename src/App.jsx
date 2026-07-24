@@ -8,7 +8,6 @@ import Features from "./components/Features";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Sponsors from "./components/PastEvents";
 import ScrollToTop from "./components/ScrollToTop";
 import { StickyScrollRevealDemo } from "./components/sticky_scroll";
 import { Navbar as NavBar, Preloader } from "@cyscomvit/cyscomui";
@@ -16,7 +15,6 @@ import TargetCursor from "./components/TargetCursor";
 
 const OurTeam = lazy(() => import("./components/OurTeam"));
 // Auth routes removed for future rewrite
-
 // Flat Pages
 const NotFound = lazy(() => import("./pages/NotFound"));
 const EventsHub = lazy(() => import("./pages/Events/EventsHub"));
@@ -27,9 +25,9 @@ const Leaderboard = lazy(() => import("./pages/Projects/Leaderboard"));
 const ProjectShowcase = lazy(() => import("./pages/Projects/ProjectShowcase"));
 const Recruitments = lazy(() => import("./pages/Recruitments/Recruitments"));
 const Writeups = lazy(() => import("./pages/Writeups/components/Writeups"));
-
 const BlogHome = lazy(() => import("./pages/Blog/BlogHome"));
 const BlogPostDetail = lazy(() => import("./pages/Blog/BlogPostDetail"));
+const SponsorsPage = lazy(() => import("./pages/Sponsors/Sponsors"));
 
 function MainSite() {
   return (
@@ -40,7 +38,6 @@ function MainSite() {
         <Features />
         <Story />
         <StickyScrollRevealDemo />
-        <Sponsors />
         <Contact />
         <Footer />
       </div>
@@ -91,9 +88,12 @@ function App() {
       window.scrollTo(0, 0);
       return;
     }
-
+    if (itemLabel === "Sponsors") {
+      navigate("/sponsors");
+      window.scrollTo(0, 0);
+      return;
+    }
     const targetId = itemLabel === "Home" ? "hero" : itemLabel.toLowerCase().replace(" ", "-");
-
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
@@ -104,7 +104,7 @@ function App() {
     }
   };
 
-  const navItems = ["Home", "About", "Projects", "Our Team", "Blogs", "Writeups"].map(label => ({
+  const navItems = ["Home", "About", "Projects", "Our Team", "Blogs", "Writeups", "Sponsors"].map(label => ({
     label,
     url: `#${label === "Home" ? "hero" : label.toLowerCase().replace(" ", "-")}`,
     onClick: () => handleNavigate(label)
@@ -190,6 +190,9 @@ function App() {
               
               {/* Flat Page Routes */}
               {/* Events routes removed temporarily */}
+              
+              {/* Sponsors */}
+              <Route path="/sponsors" element={<SponsorsPage />} />
               
               {/* Projects */}
               <Route path="/projects" element={<ProjectsHome />} />

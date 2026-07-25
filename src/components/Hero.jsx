@@ -82,7 +82,7 @@ const Hero = () => {
               &gt; SYSTEM COMPROMISED
             </div>
             <div className="text-lg md:text-xl text-white opacity-80">
-              &gt; THINK BEFORE YOU CLICK
+              &gt; THINK BEFORE YOU CLICK!
             </div>
             <div className="mt-8 text-sm text-white opacity-70 animate-pulse">
               [TERMINAL_ID: 0x{Math.random().toString(16).substr(2, 8).toUpperCase()}]
@@ -130,17 +130,17 @@ const Hero = () => {
         <div className="absolute left-0 top-0 z-40 flex size-full flex-col items-center justify-center px-4">
           <div className="flex flex-col items-center justify-center text-center">
             <h1 className="special-font hero-heading relative text-blue-100">
-              <span className="relative z-10">CYS<b>C</b>OM</span>  
+              <span className="relative z-10"><b>C</b>YS<b>C</b>OM</span>  
             </h1>
 
             <p className="hero-text mb-5 max-w-64 md:max-w-md font-robert-regular text-blue-100 text-sm md:text-base px-4">
-              Think Before You Click <br /> Cybersecurity Student Community
+              Cybersecurity Student Community <br/> Think before you click... <br /> 
             </p>
 
             <div className="flex justify-center">
               <Button
                 id="watch-trailer"
-                title={isHacked ? "You are hacked!" : "Click here"}
+                title={isHacked ? "You are hacked!" : "Click here..."}
                 leftIcon={isHacked ? null : <TiLocationArrow />}
                 containerClass={`${isHacked ? 'bg-red-600 text-white' : 'bg-yellow-300 text-black'} flex-center gap-1`}
                 onClick={handleHackClick}

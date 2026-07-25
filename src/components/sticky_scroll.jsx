@@ -48,9 +48,9 @@ const content = [
 
 export function StickyScrollRevealDemo() {
   return (
-    <div className="w-full py-16 animate-fade-in-up cyber-grid relative">
-      <div className="section-divider absolute top-0" />
-      <div className="container mx-auto px-5 md:px-10 mb-16">
+    <div id="events" className="w-full py-16 animate-fade-in-up cyber-grid relative">
+      <div className="section-divider absolute top-0 bottom-0" />
+      <div className="container mx-auto px-5 md:px-10 mb-0">
         <div className="text-center animate-fade-in-up">
           <p className="font-general text-sm uppercase tracking-wider text-blue-300 mb-6 text-glow">
             Our Journey
@@ -78,7 +78,7 @@ export function StickyScrollRevealDemo() {
         </div>
       </div>
       <PhotoCarousel content={content} contentClassName="" gridCols={3} />
-      <div className="section-divider absolute bottom-0" />
+      <div className="section-divider absolute bottom--1" />
     </div>
   );
 }

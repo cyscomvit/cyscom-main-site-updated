@@ -63,13 +63,8 @@ function App() {
   const location = useLocation();
 
   const handleNavigate = (itemLabel) => {
-    if (itemLabel === "Our Team") {
+    if (itemLabel === "Team") {
       navigate("/our-team");
-      window.scrollTo(0, 0);
-      return;
-    }
-    if (itemLabel === "Events") {
-      navigate("/events");
       window.scrollTo(0, 0);
       return;
     }
@@ -104,7 +99,7 @@ function App() {
     }
   };
 
-  const navItems = ["Home", "About", "Projects", "Our Team", "Blogs", "Writeups", "Sponsors"].map(label => ({
+  const navItems = ["Home", "About", "Events", "Projects", "Team", "Blogs", "Writeups", "Sponsors"].map(label => ({
     label,
     url: `#${label === "Home" ? "hero" : label.toLowerCase().replace(" ", "-")}`,
     onClick: () => handleNavigate(label)
@@ -147,7 +142,6 @@ function App() {
       { type: 'image', src: `${import.meta.env.BASE_URL}img/team018.jpg` },
       { type: 'image', src: `${import.meta.env.BASE_URL}img/contact-1.webp` },
       { type: 'image', src: `${import.meta.env.BASE_URL}img/contact-2.webp` },
-      { type: 'image', src: `${import.meta.env.BASE_URL}img/swordman.webp` },
     ];
     
     const loadLazyAssets = async () => {

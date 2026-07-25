@@ -27,7 +27,7 @@ const About = () => {
         </p>
 
         <AnimatedTitle
-          title="<b>Discover the VIT Chennai'S ONLY CYBERSECURITY CLUB</b>"
+          title="<b>Discover VIT Chennai's ONLY CYBERSECURITY CLUB</b>"
           containerClass="mt-5 !text-white text-center"
         />
 

@@ -1,6 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
-import { useProjects } from "./pages/Projects/useProjects";
 import { TiLocationArrow } from "react-icons/ti";
 import About from "./components/About";
 import Hero from "./components/Hero";
@@ -14,15 +13,11 @@ import { Navbar as NavBar, Preloader } from "@cyscomvit/cyscomui";
 import TargetCursor from "./components/TargetCursor";
 
 const OurTeam = lazy(() => import("./components/OurTeam"));
-// Auth routes removed for future rewrite
-// Flat Pages
+// Sugeeth comment: I have stripped out almost most off the original routes and components to make the landing page as safe as possible.
 const NotFound = lazy(() => import("./pages/NotFound"));
 const EventsHub = lazy(() => import("./pages/Events/EventsHub"));
 const PublicRegister = lazy(() => import("./pages/Events/PublicRegister"));
 const PublicTransfer = lazy(() => import("./pages/Events/PublicTransfer"));
-const ProjectsHome = lazy(() => import("./pages/Projects/Home"));
-const Leaderboard = lazy(() => import("./pages/Projects/Leaderboard"));
-const ProjectShowcase = lazy(() => import("./pages/Projects/ProjectShowcase"));
 const Recruitments = lazy(() => import("./pages/Recruitments/Recruitments"));
 const Writeups = lazy(() => import("./pages/Writeups/components/Writeups"));
 const BlogHome = lazy(() => import("./pages/Blog/BlogHome"));
@@ -56,7 +51,7 @@ const LoadingFallback = () => (
 );
 
 function App() {
-  useProjects();
+  
   const [isLoading, setIsLoading] = useState(true);
   const [criticalAssetsLoaded, setCriticalAssetsLoaded] = useState(false);
   const navigate = useNavigate();
@@ -65,11 +60,6 @@ function App() {
   const handleNavigate = (itemLabel) => {
     if (itemLabel === "Team") {
       navigate("/our-team");
-      window.scrollTo(0, 0);
-      return;
-    }
-    if (itemLabel === "Projects") {
-      navigate("/projects");
       window.scrollTo(0, 0);
       return;
     }
@@ -99,7 +89,7 @@ function App() {
     }
   };
 
-  const navItems = ["Home", "About", "Events", "Projects", "Team", "Blogs", "Writeups", "Sponsors"].map(label => ({
+  const navItems = ["Home", "About", "Events", "Team", "Blogs", "Writeups", "Sponsors"].map(label => ({
     label,
     url: `#${label === "Home" ? "hero" : label.toLowerCase().replace(" ", "-")}`,
     onClick: () => handleNavigate(label)
@@ -180,18 +170,9 @@ function App() {
             <Routes>
               <Route path="/" element={<MainSite />} />
               <Route path="/our-team" element={<OurTeam />} />
-              {/* Auth routes temporarily disabled */}
-              
-              {/* Flat Page Routes */}
-              {/* Events routes removed temporarily */}
               
               {/* Sponsors */}
               <Route path="/sponsors" element={<SponsorsPage />} />
-              
-              {/* Projects */}
-              <Route path="/projects" element={<ProjectsHome />} />
-              <Route path="/projects/leaderboard" element={<Leaderboard />} />
-              <Route path="/projects/showcase" element={<ProjectShowcase />} />
               
               {/* Recruitments & Writeups */}
               <Route path="/recruitments/*" element={<Recruitments />} />

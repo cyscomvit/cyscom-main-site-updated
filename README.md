@@ -4,7 +4,6 @@ The official website for CYSCOM (Cybersecurity Community of VIT Chennai), VIT Ve
 
 **Project Name:** `cyscom-vit-chennai` (npm package)
 **Organization:** CYSCOM (Cybersecurity Community of VIT Chennai)
-**Website:** https://cyscom-vit-chennai.vercel.app
 
 ## Overview
 

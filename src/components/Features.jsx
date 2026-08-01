@@ -1,5 +1,5 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useEffect, useRef, useState, useCallback, lazy, Suspense } from "react";
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { TiLocationArrow } from "react-icons/ti";
 
 export const BentoTilt = ({ children, className = "" }) => {
@@ -129,7 +129,10 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   );
 };
 
-const Features = () => (
+const Features = () => {
+  const navigate = useNavigate();
+
+  return (
   <section className="bg-black pb-20 md:pb-52 cyber-grid relative">
     <div className="section-divider absolute top-0" />
     <div className="container mx-auto px-3 md:px-10">
@@ -141,9 +144,10 @@ const Features = () => (
           Immerse yourself in a rich and ever-expanding universe where vulnerabilities await to be cracked, converging into an interconnected overlay experience on your world.
         </p>
       </div>
-      <a
-        href="/blog"
-        className="block size-full"
+      <button
+        type="button"
+        onClick={() => navigate("/blog")}
+        className="block size-full cursor-pointer text-left"
       >
       <BentoTilt className="border-hsla relative mb-4 md:mb-7 min-h-[16rem] h-auto md:h-96 lg:h-[65vh] w-full overflow-hidden rounded-md">
         <BentoCard
@@ -158,7 +162,7 @@ const Features = () => (
         />
       </BentoTilt>
         
-      </a>
+      </button>
    
       <div className="grid h-auto md:h-[135vh] w-full grid-cols-2 grid-rows-auto md:grid-rows-3 gap-3 md:gap-7">
         <BentoTilt className="bento-tilt_1 row-span-1 col-span-2 md:col-span-1 md:row-span-2 min-h-48 h-auto md:h-auto">
@@ -235,16 +239,18 @@ And the next one? Already on the way..."
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_2 col-span-1 min-h-48 h-auto md:h-auto">
-          <a
-            href="/#blog"
-            className="block size-full"
+          <button
+            type="button"
+            onClick={() => navigate("/blog")}
+            className="block size-full cursor-pointer text-left"
           >
             <BentoCard src={`${import.meta.env.BASE_URL}img/blogs.webp`} />
-          </a>
+          </button>
         </BentoTilt>
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Features;

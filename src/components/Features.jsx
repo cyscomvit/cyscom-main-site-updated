@@ -206,7 +206,7 @@ And the next one? Already on the way..."
 
         <BentoTilt className="bento-tilt_1 col-span-1 md:col-span-1 min-h-48 h-auto md:h-auto">
           <a
-            href="/opensrc"
+            href="https://opensrc.cyscomvit.com/leaderboard"
             className="block size-full"
           >
             <BentoCard

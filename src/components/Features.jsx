@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef, useState, useCallback, lazy, Suspense } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 
 export const BentoTilt = ({ children, className = "" }) => {

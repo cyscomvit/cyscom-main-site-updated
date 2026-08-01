@@ -72,6 +72,10 @@ function App() {
       window.scrollTo(0, 0);
       return;
     }
+    if (itemLabel === "Writeups") {
+      window.location.href = "https://writeups.cyscomvit.com/";
+      return;
+    }
     const targetId = itemLabel === "Home" ? "hero" : itemLabel.toLowerCase().replace(" ", "-");
     if (location.pathname !== "/") {
       navigate("/");

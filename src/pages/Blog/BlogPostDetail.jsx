@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useBlogs } from "./useBlogs";
 import { FaLinkedinIn, FaWhatsapp, FaTwitter, FaCopy, FaArrowLeft } from "react-icons/fa";
 import { BiTimeFive, BiCalendar, BiUser } from "react-icons/bi";
-import imageMap from "../../pages/Writeups/image_map.json";
 
 const BlogPostDetail = () => {
   const { posts = [], isLoading } = useBlogs();
@@ -48,14 +47,7 @@ const BlogPostDetail = () => {
 
   const processedContent = useMemo(() => {
     if (!post?.content) return '';
-    return post.content.replace(/<img\s+([^>]*?)src=["']([^"']+)["']([^>]*?)>/gi, (match, prefix, src, suffix) => {
-      if (src.startsWith('http') || src.startsWith('data:')) return match;
-      let lookup = src.startsWith('/') ? src.slice(1) : src;
-      if (imageMap[lookup]) {
-        return `<img ${prefix}src="/${imageMap[lookup]}"${suffix}>`;
-      }
-      return match;
-    });
+    return post.content;
   }, [post]);
 
   if (!post) {

@@ -19,7 +19,6 @@ const EventsHub = lazy(() => import("./pages/Events/EventsHub"));
 const PublicRegister = lazy(() => import("./pages/Events/PublicRegister"));
 const PublicTransfer = lazy(() => import("./pages/Events/PublicTransfer"));
 const Recruitments = lazy(() => import("./pages/Recruitments/Recruitments"));
-const Writeups = lazy(() => import("./pages/Writeups/components/Writeups"));
 const BlogHome = lazy(() => import("./pages/Blog/BlogHome"));
 const BlogPostDetail = lazy(() => import("./pages/Blog/BlogPostDetail"));
 const SponsorsPage = lazy(() => import("./pages/Sponsors/Sponsors"));
@@ -65,11 +64,6 @@ function App() {
     }
     if (itemLabel === "Blogs") {
       navigate("/blog");
-      window.scrollTo(0, 0);
-      return;
-    }
-    if (itemLabel === "Writeups") {
-      navigate("/writeups");
       window.scrollTo(0, 0);
       return;
     }
@@ -174,9 +168,8 @@ function App() {
               {/* Sponsors */}
               <Route path="/sponsors" element={<SponsorsPage />} />
               
-              {/* Recruitments & Writeups */}
+              {/* Recruitments */}
               <Route path="/recruitments/*" element={<Recruitments />} />
-              <Route path="/writeups/*" element={<Writeups />} />
               
               <Route path="/blog" element={<BlogHome />} />
               <Route path="/blog/post/:id" element={<BlogPostDetail />} />

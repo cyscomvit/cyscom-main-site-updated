@@ -162,7 +162,7 @@ const Features = () => (
       <div className="grid h-auto md:h-[135vh] w-full grid-cols-2 grid-rows-auto md:grid-rows-3 gap-3 md:gap-7">
         <BentoTilt className="bento-tilt_1 row-span-1 col-span-2 md:col-span-1 md:row-span-2 min-h-48 h-auto md:h-auto">
           <a
-            href="/writeups"
+            href="https://writeups.cyscomvit.com"
             className="block size-full"
           >
           <BentoCard
@@ -235,7 +235,7 @@ And the next one? Already on the way..."
 
         <BentoTilt className="bento-tilt_2 col-span-1 min-h-48 h-auto md:h-auto">
           <a
-            href="/blog"
+            href="/#blog"
             className="block size-full"
           >
             <BentoCard src={`${import.meta.env.BASE_URL}img/blogs.webp`} />

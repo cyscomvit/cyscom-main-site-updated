@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "./Footer";
@@ -47,11 +47,9 @@ const Avatar = ({ name, size = "w-20 h-20 text-xl" }) => (
 
 const OurTeam = () => {
   const containerRef = useRef(null);
-  const [hoveredCabinetMember, setHoveredCabinetMember] = useState(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title Animation - use containerRef instead of .hero-section
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -68,7 +66,6 @@ const OurTeam = () => {
         "-=0.8"
       );
 
-      // Hero Image Reveal
       gsap.fromTo(
         ".team-hero-image",
         { clipPath: "inset(0 100% 0 0)", scale: 1.1 },
@@ -84,7 +81,6 @@ const OurTeam = () => {
         }
       );
       
-      // Section Titles
       gsap.utils.toArray(".section-title").forEach(title => {
         gsap.fromTo(title,
           { opacity: 0, x: -30 },
@@ -98,7 +94,6 @@ const OurTeam = () => {
         );
       });
 
-      // Team Cards stagger
       gsap.utils.toArray(".team-grid").forEach(grid => {
         const cards = grid.querySelectorAll(".team-card");
         gsap.fromTo(cards,
@@ -162,7 +157,7 @@ const OurTeam = () => {
           <span className="w-8 h-[2px] bg-cyan-500 inline-block"></span>
           Board
         </h2>
-        <div className="team-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+        <div className="team-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
           {boardMembers.map((member, index) => (
             <TeamCard key={index} member={member} />
           ))}
@@ -182,15 +177,14 @@ const OurTeam = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5 rounded-3xl blur-3xl -z-10"></div>
           
           <div className="flex flex-col lg:flex-row gap-12 md:gap-16 items-start">
-            {/* Group Photo / Active Member Preview */}
-            <div className="lg:sticky lg:top-24 relative z-0 w-full lg:w-[350px] xl:w-[450px] flex-shrink-0 aspect-[4/5] lg:aspect-[3/4] lg:max-h-[calc(100vh-120px)] rounded-2xl overflow-hidden shadow-[0_20px_60px_-20px_rgba(6,182,212,0.3)] border border-white/10 group">
-              {/* Group Photo Layer */}
+            {/* Group Photo (always visible) */}
+            <div className="lg:sticky lg:top-24 relative z-0 w-full lg:w-[350px] xl:w-[450px] flex-shrink-0 aspect-[4/5] lg:aspect-[3/4] lg:max-h-[calc(100vh-120px)] rounded-2xl overflow-hidden shadow-[0_20px_60px_-20px_rgba(6,182,212,0.3)] border border-white/10">
               <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-purple-500/10 z-10 mix-blend-overlay pointer-events-none transition-opacity duration-500 group-hover:opacity-0"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-purple-500/10 z-10 mix-blend-overlay pointer-events-none"></div>
                 <img
                   src={cabinetGroupPhoto}
                   alt="Cabinet"
-                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 filter grayscale-[15%] group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-out hover:scale-105 filter grayscale-[15%] hover:grayscale-0"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20">
                   <p className="font-mono text-xs md:text-sm text-cyan-300/80 tracking-[0.2em] uppercase text-center">
@@ -198,42 +192,9 @@ const OurTeam = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Active Member Overlay Layer (expands like a card on hover) */}
-              <div 
-                className={`absolute inset-0 bg-[#0a0a0a] transition-all duration-500 ease-out z-10 ${
-                  hoveredCabinetMember ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                }`}
-              >
-                {hoveredCabinetMember && (
-                  <>
-                    <div className="absolute inset-0 bg-cyan-500/20 mix-blend-overlay z-10 pointer-events-none"></div>
-                    <img
-                      src={hoveredCabinetMember.img}
-                      alt={hoveredCabinetMember.name}
-                      className="w-full h-full object-cover filter grayscale-[15%] transition-transform duration-700 hover:scale-105"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
-                      <div className="transform translate-y-0 transition-transform duration-500">
-                        <h3 className="font-zentry text-3xl md:text-4xl uppercase text-white mb-1 drop-shadow-md">
-                          {hoveredCabinetMember.name}
-                        </h3>
-                        <p className="font-mono text-xs md:text-sm text-cyan-400 tracking-[0.15em] uppercase">
-                          {hoveredCabinetMember.department}
-                        </p>
-                        {hoveredCabinetMember.quote && (
-                          <p className="text-xs text-gray-300 italic mt-2 line-clamp-2">
-                            "{hoveredCabinetMember.quote}"
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
             </div>
             
-            {/* Members List */}
+            {/* Members List – cards now match Board grid */}
             <div className="flex-1 relative z-20 space-y-6 md:space-y-8 pt-4 lg:pt-0 w-full">
               {(() => {
                 const grouped = cabinetMembers.reduce((acc, member) => {
@@ -250,37 +211,16 @@ const OurTeam = () => {
                       </h3>
                       <div className="flex-1 h-px bg-gradient-to-r from-cyan-500/30 to-transparent"></div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 ml-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
                       {members.map((member, idx) => (
-                        <div
+                        <TeamCard
                           key={`${dept}-${idx}`}
-                          onMouseEnter={() => setHoveredCabinetMember(member)}
-                          onMouseLeave={() => setHoveredCabinetMember(null)}
-                          className="group flex items-center gap-4 p-3 md:p-4 rounded-xl bg-[#0a0a0a]/50 border border-white/5 hover:border-cyan-500/20 hover:bg-[#0a0a0a]/80 transition-all duration-300 cursor-pointer"
-                        >
-                          {member.img ? (
-                            <img
-                              src={member.img}
-                              alt={member.name}
-                              className="w-14 h-14 rounded-full object-cover border border-cyan-500/20 transition-transform duration-500 group-hover:scale-110 flex-shrink-0"
-                            />
-                          ) : (
-                            <Avatar name={member.name} size="w-14 h-14 text-sm md:text-base flex-shrink-0" />
-                          )}
-                          <div className="min-w-0 flex-1">
-                            <h4 className="font-zentry text-base md:text-lg uppercase text-white group-hover:text-cyan-300 transition-colors truncate">
-                              {member.name}
-                            </h4>
-                            <p className="font-mono text-xs text-cyan-400/70 tracking-[0.1em] uppercase mt-1 truncate">
-                              {member.department}
-                            </p>
-                            {member.quote && (
-                              <p className="text-[10px] text-gray-400 italic mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-1">
-                                "{member.quote}"
-                              </p>
-                            )}
-                          </div>
-                        </div>
+                          member={{
+                            ...member,
+                            role: member.department, // use department like role subtitle
+                          }}
+                          department={member.department}
+                        />
                       ))}
                     </div>
                   </div>
@@ -303,17 +243,25 @@ const TeamCard = ({ member, department }) => {
   return (
     <div className="team-card group relative overflow-hidden rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 hover:border-cyan-500/30 hover:shadow-[0_10px_40px_-10px_rgba(34,211,238,0.2)] hover:-translate-y-2 cursor-pointer">
       <div className="aspect-[3/4] overflow-hidden relative">
-        {/* Glow effect that follows hover */}
+        {/* Glow effect on hover */}
         <div className="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay z-10 pointer-events-none"></div>
-        <img 
-          src={member.img} 
-          alt={member.name} 
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 filter grayscale-[20%] group-hover:grayscale-0"
-        />
+        {member.img ? (
+          <img
+            src={member.img}
+            alt={member.name}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 filter grayscale-[20%] group-hover:grayscale-0"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-[#050505]">
+            <Avatar name={member.name} size="w-20 h-20 text-xl" />
+          </div>
+        )}
       </div>
       <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-20">
         <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-          <h3 className="font-zentry text-2xl md:text-3xl uppercase text-white mb-1 drop-shadow-md">{member.name}</h3>
+          <h3 className="font-zentry text-2xl md:text-3xl uppercase text-white mb-1 drop-shadow-md">
+            {member.name}
+          </h3>
           <p className="font-mono text-xs md:text-sm text-cyan-400 tracking-[0.15em] uppercase">
             {member.role || department}
           </p>
